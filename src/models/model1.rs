@@ -3,9 +3,9 @@ use super::*;
 pub fn model1() -> EModel {
     let mut ret = EModel {
         start_addr: 1,
-        end_addr: 66,
+        end_addr: 2,
         model_number: 1,
-        qtd: 66,
+        qtd: 2,
         update: false,
         data: Vec::new(),
     };
