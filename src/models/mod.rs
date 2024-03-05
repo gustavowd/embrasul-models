@@ -3,6 +3,8 @@ use crate::types::*;
 
 pub mod model1;
 pub mod model2;
+pub mod model3;
+pub mod model4;
 
 
 #[derive(Debug, Clone)]
@@ -98,7 +100,9 @@ impl EmbrasulModels for EModel {
         match model_number {
             1 => model1::model1(),
             2 => model2::model2(),
-            _ => return model_end(),
+            3 => model3::model3(),
+            4 => model4::model4(),
+            _ => model_end(),
         }
     }
 
@@ -520,38 +524,35 @@ impl EmbrasulModels for EModel {
                 _ => {},
             }
         }
-        return None
+        None
     }
 
     fn get_i32_by_index(&self, idx: usize) -> Option<i32> {
         match self.data[idx] {
             EDataTypes::EmbrasulI32(data) => {
-                return Some(data.value);
+                Some(data.value)
             },
-            _ => return None,
+            _ => None,
         }
     }
 
     fn get_i64(&self, point: &str) -> Option<i64> {
         for data_tmp in self.data.iter() {
-            match data_tmp {
-                EDataTypes::EmbrasulI64(data) => {
-                    if data.name.contains(point) && (data.name.len() == point.len()) {
-                        return Some(data.value);
-                    }
-                },
-                _ => {},
+            if let EDataTypes::EmbrasulI64(data) = data_tmp {
+                if data.name.contains(point) && (data.name.len() == point.len()) {
+                    return Some(data.value);
+                }
             }
         }
-        return None
+        None
     }
 
     fn get_i64_by_index(&self, idx: usize) -> Option<i64> {
         match self.data[idx] {
             EDataTypes::EmbrasulI64(data) => {
-                return Some(data.value);
+                Some(data.value)
             },
-            _ => return None,
+            _ => None,
         }
     }
 
@@ -576,7 +577,7 @@ impl EmbrasulModels for EModel {
 
 
 pub fn srt_to_vec_u8(src: &str, mut dst: &mut [u8]){
-    dst.write(src.as_bytes()).unwrap();
+    dst.write_all(src.as_bytes()).unwrap();
 }
 
 
