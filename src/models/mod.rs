@@ -5,6 +5,7 @@ pub mod model1;
 pub mod model2;
 pub mod model3;
 pub mod model4;
+pub mod model5;
 
 
 #[derive(Debug, Clone)]
@@ -102,6 +103,7 @@ impl EmbrasulModels for EModel {
             2 => model2::model2(),
             3 => model3::model3(),
             4 => model4::model4(),
+            5 => model5::model5(),
             _ => model_end(),
         }
     }
