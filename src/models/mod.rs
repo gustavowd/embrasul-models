@@ -59,26 +59,22 @@ impl EModels {
     }
 
     pub fn get_model_index(&self, model_number: u16) -> Option<usize> {
-        let mut idx = 0;
-        for model in self.models.iter() {
+        for (idx, model) in self.models.iter().enumerate() {
             if model_number == model.model_number {
                 return Some(idx);
             }
-            idx += 1;
         }
         None
     }
 
     pub fn compute_addr (&mut self) {
-        let mut idx = 0;
         let mut end_addr = 0;
-        for model in self.models.iter_mut() {
+        for (idx, model) in self.models.iter_mut().enumerate() {
             if idx == 0 {
                 model.start_addr = 2;
             }else{
                 model.start_addr = end_addr;
             }
-            idx += 1;
             model.end_addr = model.start_addr + model.qtd + 2;
             end_addr = model.end_addr;
         }
@@ -113,74 +109,65 @@ impl EmbrasulModels for EModel {
             match data_tmp {
                 EDataTypes::EmbrasulString(data) => {
                     if data.name.contains(point) && (data.name.len() == point.len()){
-                        match value {
-                            EDataTypes::EmbrasulString(update_value) =>  data.value = update_value.value.clone(),
-                            _ => {},
-                        };
+                        if let EDataTypes::EmbrasulString(update_value) = value {
+                            data.value = update_value.value.clone();
+                        }
                     }
                 },
                 EDataTypes::EmbrasulF32(data) => {
                     if data.name.contains(point) && (data.name.len() == point.len()){
-                        match value {
-                            EDataTypes::EmbrasulF32(update_value) =>  data.value = update_value.value,
-                            _ => {},
-                        };
+                        if let EDataTypes::EmbrasulF32(update_value) = value {
+                            data.value = update_value.value;
+                        }
                     }
                 },
                 EDataTypes::EmbrasulU16(data) => {
                     if data.name.contains(point) && (data.name.len() == point.len()){
-                        match value {
-                            EDataTypes::EmbrasulU16(update_value) =>  data.value = update_value.value,
-                            _ => {},
-                        };
+                        if let EDataTypes::EmbrasulU16(update_value) = value {
+                            data.value = update_value.value;
+                        }
                     }
                 },
                 EDataTypes::EmbrasulU32(data) => {
                     if data.name.contains(point) && (data.name.len() == point.len()){
-                        match value {
-                            EDataTypes::EmbrasulU32(update_value) =>  data.value = update_value.value,
-                            _ => {},
-                        };
+                        if let EDataTypes::EmbrasulU32(update_value) = value {
+                            data.value = update_value.value;
+                        }
                     }
                 },
                 EDataTypes::EmbrasulU64(data) => {
                     if data.name.contains(point) && (data.name.len() == point.len()){
-                        match value {
-                            EDataTypes::EmbrasulU64(update_value) =>  data.value = update_value.value,
-                            _ => {},
-                        };
+                        if let EDataTypes::EmbrasulU64(update_value) = value {
+                            data.value = update_value.value;
+                        }
                     }
                 },
                 EDataTypes::EmbrasulU128(data) => {
                     if data.name.contains(point) && (data.name.len() == point.len()){
-                        match value {
-                            EDataTypes::EmbrasulU128(update_value) =>  data.value = update_value.value,
-                            _ => {},
-                        };
+                        if let EDataTypes::EmbrasulU128(update_value) = value {
+                            data.value = update_value.value;
+                        }
                     }
                 },
                 EDataTypes::EmbrasulI16(data) => {
                     if data.name.contains(point) && (data.name.len() == point.len()){
-                        match value {
-                            EDataTypes::EmbrasulI16(update_value) =>  data.value = update_value.value,
-                            _ => {},
-                        };
+                        if let EDataTypes::EmbrasulI16(update_value) = value {
+                            data.value = update_value.value;
+                        }
                     }
                 },
                 EDataTypes::EmbrasulI32(data) => {
                     if data.name.contains(point) && (data.name.len() == point.len()){
-                        match value {
-                            EDataTypes::EmbrasulI32(update_value) =>  data.value = update_value.value,
-                            _ => {},
-                        };
+                        if let EDataTypes::EmbrasulI32(update_value) = value {
+                            data.value = update_value.value;
+                        }
                     }
                 },
                 EDataTypes::EmbrasulI64(data) => {
                     if data.name.contains(point) && (data.name.len() == point.len()){
-                        match value {
-                            EDataTypes::EmbrasulI64(update_value) =>  data.value = update_value.value,
-                            _ => {},
-                        };
+                        if let EDataTypes::EmbrasulI64(update_value) = value {
+                            data.value = update_value.value;
+                        }
                     }
                 },
             }
@@ -190,58 +177,49 @@ impl EmbrasulModels for EModel {
     fn update_data_by_index(&mut self, index: usize, value: &EDataTypes) {
         match &mut self.data[index] {
             EDataTypes::EmbrasulString(data) => {
-                match value {
-                    EDataTypes::EmbrasulString(update_value) =>  data.value = update_value.value.clone(),
-                    _ => {},
-                };
+                if let EDataTypes::EmbrasulString(update_value) = value {
+                    data.value = update_value.value.clone();
+                }
             },
             EDataTypes::EmbrasulF32(data) => {
-                match value {
-                    EDataTypes::EmbrasulF32(update_value) =>  data.value = update_value.value,
-                    _ => {},
-                };
+                if let EDataTypes::EmbrasulF32(update_value) = value {
+                    data.value = update_value.value;
+                }
             },
             EDataTypes::EmbrasulU16(data) => {
-                match value {
-                    EDataTypes::EmbrasulU16(update_value) =>  data.value = update_value.value,
-                    _ => {},
-                };
+                if let EDataTypes::EmbrasulU16(update_value) = value {
+                    data.value = update_value.value;
+                }
             },
             EDataTypes::EmbrasulU32(data) => {
-                match value {
-                    EDataTypes::EmbrasulU32(update_value) =>  data.value = update_value.value,
-                    _ => {},
-                };
+                if let EDataTypes::EmbrasulU32(update_value) = value {
+                    data.value = update_value.value;
+                }
             },
             EDataTypes::EmbrasulU64(data) => {
-                match value {
-                    EDataTypes::EmbrasulU64(update_value) =>  data.value = update_value.value,
-                    _ => {},
-                };
+                if let EDataTypes::EmbrasulU64(update_value) = value {
+                    data.value = update_value.value;
+                }
             },
             EDataTypes::EmbrasulU128(data) => {
-                match value {
-                    EDataTypes::EmbrasulU128(update_value) =>  data.value = update_value.value,
-                    _ => {},
-                };
+                if let EDataTypes::EmbrasulU128(update_value) = value {
+                    data.value = update_value.value;
+                }
             },
             EDataTypes::EmbrasulI16(data) => {
-                match value {
-                    EDataTypes::EmbrasulI16(update_value) =>  data.value = update_value.value,
-                    _ => {},
-                };
+                if let EDataTypes::EmbrasulI16(update_value) = value {
+                    data.value = update_value.value;
+                }
             },
             EDataTypes::EmbrasulI32(data) => {
-                match value {
-                    EDataTypes::EmbrasulI32(update_value) =>  data.value = update_value.value,
-                    _ => {},
-                };
+                if let EDataTypes::EmbrasulI32(update_value) = value {
+                    data.value = update_value.value;
+                }
             },
             EDataTypes::EmbrasulI64(data) => {
-                match value {
-                    EDataTypes::EmbrasulI64(update_value) =>  data.value = update_value.value,
-                    _ => {},
-                };
+                if let EDataTypes::EmbrasulI64(update_value) = value {
+                    data.value = update_value.value;
+                }
             },
         }
     }
@@ -296,7 +274,7 @@ impl EmbrasulModels for EModel {
                 }
             };
         }
-        return EDataTypes::EmbrasulU16(Point { name: "", offset: 0, length: 1, write_access: false, value: 0 } )
+        EDataTypes::EmbrasulU16(Point { name: "", offset: 0, length: 1, write_access: false, value: 0 })
     }
 
     fn get_data_index(&self, point: &str) -> usize {
@@ -351,179 +329,155 @@ impl EmbrasulModels for EModel {
             };
             idx += 1;
         }
-        return idx;
+        idx
     }
 
     fn get_f32(&self, point: &str) -> Option<f32> {
         for data_tmp in self.data.iter() {
-            match data_tmp {
-                EDataTypes::EmbrasulF32(data) => {
-                    if data.name.contains(point) && (data.name.len() == point.len()) {
-                        return Some(data.value);
-                    }
-                },
-                _ => {},
+            if let EDataTypes::EmbrasulF32(data) = data_tmp {
+                if data.name.contains(point) && (data.name.len() == point.len()) {
+                    return Some(data.value);
+                }
             }
         }
-        return None
+        None
     }
 
     fn get_f32_by_index(&self, idx: usize) -> Option<f32> {
         match self.data[idx] {
             EDataTypes::EmbrasulF32(data) => {
-                return Some(data.value);
+                Some(data.value)
             },
-            _ => return None,
+            _ => None,
         }
     }
 
     fn get_string(&self, point: &str) -> Option<String> {
         for data_tmp in self.data.iter() {
-            match data_tmp {
-                EDataTypes::EmbrasulString(data) => {
-                    if data.name.contains(point) && (data.name.len() == point.len()) {
-                        return Some(data.value.clone());
-                    }
-                },
-                _ => {},
+            if let EDataTypes::EmbrasulString(data) = data_tmp {
+                if data.name.contains(point) && (data.name.len() == point.len()) {
+                    return Some(data.value.clone());
+                }
             }
         }
-        return None
+        None
     }
 
     fn get_string_by_index(&self, idx: usize) -> Option<String> {
         match &self.data[idx] {
             EDataTypes::EmbrasulString(data) => {
-                return Some(data.value.clone());
+                Some(data.value.clone())
             },
-            _ => return None,
+            _ => None,
         }
     }
 
     fn get_u16(&self, point: &str) -> Option<u16> {
         for data_tmp in self.data.iter() {
-            match data_tmp {
-                EDataTypes::EmbrasulU16(data) => {
-                    if data.name.contains(point) && (data.name.len() == point.len()) {
-                        return Some(data.value);
-                    }
-                },
-                _ => {},
+            if let EDataTypes::EmbrasulU16(data) = data_tmp {
+                if data.name.contains(point) && (data.name.len() == point.len()) {
+                    return Some(data.value);
+                }
             }
         }
-        return None
+        None
     }
 
     fn get_u16_by_index(&self, idx: usize) -> Option<u16> {
         match self.data[idx] {
             EDataTypes::EmbrasulU16(data) => {
-                return Some(data.value);
+                Some(data.value)
             },
-            _ => return None,
+            _ => None,
         }
     }
 
     fn get_u32(&self, point: &str) -> Option<u32> {
         for data_tmp in self.data.iter() {
-            match data_tmp {
-                EDataTypes::EmbrasulU32(data) => {
-                    if data.name.contains(point) && (data.name.len() == point.len()) {
-                        return Some(data.value);
-                    }
-                },
-                _ => {},
+            if let EDataTypes::EmbrasulU32(data) = data_tmp {
+                if data.name.contains(point) && (data.name.len() == point.len()) {
+                    return Some(data.value);
+                }
             }
         }
-        return None
+        None
     }
 
     fn get_u32_by_index(&self, idx: usize) -> Option<u32> {
         match self.data[idx] {
             EDataTypes::EmbrasulU32(data) => {
-                return Some(data.value);
+                Some(data.value)
             },
-            _ => return None,
+            _ => None,
         }
     }
 
     fn get_u64(&self, point: &str) -> Option<u64> {
         for data_tmp in self.data.iter() {
-            match data_tmp {
-                EDataTypes::EmbrasulU64(data) => {
-                    if data.name.contains(point) && (data.name.len() == point.len()) {
-                        return Some(data.value);
-                    }
-                },
-                _ => {},
+            if let EDataTypes::EmbrasulU64(data) = data_tmp {
+                if data.name.contains(point) && (data.name.len() == point.len()) {
+                    return Some(data.value);
+                }
             }
         }
-        return None
+        None
     }
 
     fn get_u64_by_index(&self, idx: usize) -> Option<u64> {
         match self.data[idx] {
             EDataTypes::EmbrasulU64(data) => {
-                return Some(data.value);
+                Some(data.value)
             },
-            _ => return None,
+            _ => None,
         }
     }
 
     fn get_u128(&self, point: &str) -> Option<u128> {
         for data_tmp in self.data.iter() {
-            match data_tmp {
-                EDataTypes::EmbrasulU128(data) => {
-                    if data.name.contains(point) && (data.name.len() == point.len()) {
-                        return Some(data.value);
-                    }
-                },
-                _ => {},
+            if let EDataTypes::EmbrasulU128(data) = data_tmp {
+                if data.name.contains(point) && (data.name.len() == point.len()) {
+                    return Some(data.value);
+                }
             }
         }
-        return None
+        None
     }
 
     fn get_u128_by_index(&self, idx: usize) -> Option<u128> {
         match self.data[idx] {
             EDataTypes::EmbrasulU128(data) => {
-                return Some(data.value);
+                Some(data.value)
             },
-            _ => return None,
+            _ => None,
         }
     }
 
     fn get_i16(&self, point: &str) -> Option<i16> {
         for data_tmp in self.data.iter() {
-            match data_tmp {
-                EDataTypes::EmbrasulI16(data) => {
-                    if data.name.contains(point) && (data.name.len() == point.len()) {
-                        return Some(data.value);
-                    }
-                },
-                _ => {},
+            if let EDataTypes::EmbrasulI16(data) = data_tmp {
+                if data.name.contains(point) && (data.name.len() == point.len()) {
+                    return Some(data.value);
+                }
             }
         }
-        return None
+        None
     }
 
     fn get_i16_by_index(&self, idx: usize) -> Option<i16> {
         match self.data[idx] {
             EDataTypes::EmbrasulI16(data) => {
-                return Some(data.value);
+                Some(data.value)
             },
-            _ => return None,
+            _ => None,
         }
     }
 
     fn get_i32(&self, point: &str) -> Option<i32> {
         for data_tmp in self.data.iter() {
-            match data_tmp {
-                EDataTypes::EmbrasulI32(data) => {
-                    if data.name.contains(point) && (data.name.len() == point.len()) {
-                        return Some(data.value);
-                    }
-                },
-                _ => {},
+            if let EDataTypes::EmbrasulI32(data) = data_tmp {
+                if data.name.contains(point) && (data.name.len() == point.len()) {
+                    return Some(data.value);
+                }
             }
         }
         None
