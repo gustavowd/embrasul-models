@@ -2,8 +2,8 @@ use super::*;
 
 pub fn model2() -> EModel {
     let mut ret = EModel {
-        start_addr: 67,
-        end_addr: 124,
+        start_addr: 66,
+        end_addr: 123,
         model_number: 2,
         qtd: 58,
         update: false,

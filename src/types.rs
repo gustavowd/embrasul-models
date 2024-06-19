@@ -124,7 +124,12 @@ impl PointType<u128> for u128 {
 
 impl PointType<f32> for f32 {
     fn decode(data: Vec<u16>) -> f32 {
-        let bytes = to_be_bytes(data).try_into().unwrap();
+        let mut bytes: [u8; 4] = to_be_bytes(data).try_into().unwrap();
+        let tmp: [u8; 2] = [bytes[2], bytes[3]];
+        bytes[3] = bytes[1];
+        bytes[2] = bytes[0];
+        bytes[1] = tmp[1];
+        bytes[0] = tmp[0];
         f32::from_be_bytes(bytes)
     }
 
