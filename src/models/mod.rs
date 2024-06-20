@@ -56,6 +56,11 @@ pub trait EmbrasulModels {
     fn print(&self);
 }
 
+impl Default for EModels {
+    fn default() -> Self {
+        Self::new()
+    }
+}
 
 impl EModels {
     pub fn new () -> EModels {
@@ -118,7 +123,7 @@ impl EmbrasulModels for EModel {
                 EDataTypes::EmbrasulString(data) => {
                     if data.name.contains(point) && (data.name.len() == point.len()){
                         if let EDataTypes::EmbrasulString(update_value) = value {
-                            data.value = update_value.value.clone();
+                            data.value.clone_from(&update_value.value);
                         }
                     }
                 },
@@ -186,7 +191,7 @@ impl EmbrasulModels for EModel {
         match &mut self.data[index] {
             EDataTypes::EmbrasulString(data) => {
                 if let EDataTypes::EmbrasulString(update_value) = value {
-                    data.value = update_value.value.clone();
+                    data.value.clone_from(&update_value.value);
                 }
             },
             EDataTypes::EmbrasulF32(data) => {
