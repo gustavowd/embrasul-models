@@ -585,7 +585,7 @@ impl From<(Vec<u16>, u16, u16, &EModel)> for EModel {
                     EDataTypes::EmbrasulString(data) => {
                         if offset == data.offset {
                             let slice = from.0[data.offset as usize..(data.offset + data.length) as usize].to_vec();
-                            data.value = Point::<String>::decode(slice).value;
+                            data.value = String::decode(slice);
                             offset += data.length;
                             qtd -= data.length;
                         }
