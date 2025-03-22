@@ -1,6 +1,16 @@
 [package]
 name = "embrasul-models"
 version = "0.9.2"
+description = "Embrasul devices Data Models library - may be used with any modbus library"
+authors = [
+    "Gustavo Weber Denardin <gustavo.denardin@gmail.com>"
+]
+license = "Apache-2.0"
+readme = "README.md"
+keywords = ["modbus", "embrasul", "smartgrid"]
+homepage = "https://github.com/gustavowd/embrasul-models"
+repository = "https://github.com/gustavowd/embrasul-models"
+include = ["src", "README.md", "LICENSES"]
 edition = "2024"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
